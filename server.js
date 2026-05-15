@@ -102,7 +102,12 @@ app.post('/api/analyze', async (req, res) => {
   }
 });
 
-// 서버 시작
-app.listen(PORT, () => {
-  console.log(`서버가 포트 ${PORT}에서 실행 중입니다.`);
-});
+// 서버 시작 (로컬 환경에서만 실행)
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`서버가 포트 ${PORT}에서 실행 중입니다.`);
+  });
+}
+
+// Vercel Serverless Function을 위해 app 객체를 내보냅니다.
+module.exports = app;
