@@ -1,0 +1,273 @@
+/* 
+   style.css
+   디자인 테마: Apple 스타일의 미니멀 UI
+   주요 특징: 넓은 여백, 깔끔한 타이포그래피, 부드러운 트랜지션
+*/
+
+:root {
+    /* 디자인 시스템 변수 정의 */
+    --color-primary: #0066cc;       /* Apple의 전형적인 블루 액센트 */
+    --color-bg: #ffffff;            /* 깨끗한 화이트 배경 */
+    --color-soft: #f5f5f7;          /* 부드러운 라이트 그레이 (섹션 구분용) */
+    --color-text: #1d1d1f;          /* 깊은 블랙에 가까운 그레이 (가독성 향상) */
+    --color-text-secondary: #86868b; /* 보조 텍스트용 그레이 */
+    --border-radius: 18px;          /* 둥근 모서리 */
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 부드러운 가속도 곡선 */
+}
+
+/* 기본 스타일 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+#app {
+    width: 100%;
+    max-width: 800px;
+    padding: 40px 20px;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+}
+
+.subtitle {
+    font-size: 20px;
+    color: var(--color-text-secondary);
+    font-weight: 400;
+}
+
+/* Container & Input Card */
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.input-card {
+    width: 100%;
+    background: var(--color-bg);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05); /* 은은한 그림자 */
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+textarea {
+    width: 100%;
+    height: 200px;
+    padding: 20px;
+    border: 1px solid #d2d2d7;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 18px;
+    resize: none;
+    outline: none;
+    transition: var(--transition);
+    margin-bottom: 24px;
+}
+
+textarea:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.1);
+}
+
+/* Button & Loading Spinner */
+button#analyze-btn {
+    width: 100%;
+    height: 56px;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 28px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+button#analyze-btn:hover {
+    background-color: #0077ed;
+    transform: translateY(-2px); /* 호버 시 살짝 위로 */
+}
+
+button#analyze-btn:active {
+    transform: translateY(0);
+}
+
+button#analyze-btn:disabled {
+    background-color: #d2d2d7;
+    cursor: not-allowed;
+}
+
+.spinner {
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.modal.hidden {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.modal-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px); /* 배경 블러 효과 (Apple 스타일) */
+}
+
+.modal-content {
+    position: relative;
+    background: white;
+    width: 90%;
+    max-width: 500px;
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    transform: scale(1);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal.hidden .modal-content {
+    transform: scale(0.9);
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+}
+
+.result-header h2 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.confidence-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: var(--color-soft);
+    border-radius: 20px;
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    margin-bottom: 24px;
+}
+
+.result-body {
+    text-align: left;
+    background: var(--color-soft);
+    padding: 20px;
+    border-radius: 16px;
+    margin-bottom: 24px;
+}
+
+.result-body h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: var(--color-text-secondary);
+}
+
+#modal-close-btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    background: var(--color-text);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    margin-top: 60px;
+    font-size: 14px;
+    color: var(--color-text-secondary);
+}
+
+/* Animations */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 0.8s ease forwards;
+}
+
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+.delay-3 { animation-delay: 0.6s; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 반응형 모바일 최적화 */
+@media (max-width: 600px) {
+    .hero h1 { font-size: 32px; }
+    .subtitle { font-size: 16px; }
+    .input-card { padding: 20px; }
+    textarea { font-size: 16px; }
+}

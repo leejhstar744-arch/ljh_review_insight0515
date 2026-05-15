@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Sentiment Analyzer | 감성 분석 서비스</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts: Inter 사용 (Apple 스타일과 유사한 깔끔한 폰트) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Hero Section: 서비스 소개 및 제목 -->
+        <header class="hero">
+            <h1 class="fade-in">AI Sentiment Analyzer</h1>
+            <p class="subtitle fade-in delay-1">당신의 텍스트 속에 숨겨진 감정을 AI가 정밀하게 분석합니다.</p>
+        </header>
+
+        <!-- Main Content: 입력창 및 버튼 -->
+        <main class="container">
+            <div class="input-card fade-in delay-2">
+                <textarea 
+                    id="text-input" 
+                    placeholder="분석하고 싶은 내용을 여기에 입력해 주세요..."
+                    aria-label="감성 분석 텍스트 입력"
+                ></textarea>
+                <button id="analyze-btn">
+                    <span class="btn-text">감정 분석하기</span>
+                    <div class="spinner hidden"></div>
+                </button>
+            </div>
+        </main>
+
+        <!-- Result Modal: 분석 결과 출력 (기본은 숨김 상태) -->
+        <div id="result-modal" class="modal hidden">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <button class="close-btn" aria-label="닫기">&times;</button>
+                <div class="result-header">
+                    <div id="sentiment-icon"></div>
+                    <h2 id="sentiment-result">긍정</h2>
+                    <div class="confidence-badge">
+                        신뢰도 <span id="confidence-value">95</span>%
+                    </div>
+                </div>
+                <div class="result-body">
+                    <h3>분석 이유</h3>
+                    <p id="analysis-reason">이 텍스트에서는 매우 긍정적인 표현들이 많이 발견되었습니다.</p>
+                </div>
+                <button id="modal-close-btn">확인</button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer fade-in delay-3">
+            <p>&copy; 2024 AI Sentiment Analyzer. Powered by OpenAI.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
